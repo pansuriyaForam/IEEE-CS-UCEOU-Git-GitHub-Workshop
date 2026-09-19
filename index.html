@@ -3,494 +3,576 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IEEE CS | Git & GitHub Workshop</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Inter", "Segoe UI", sans-serif;
-      background: #05070d;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    /* Animated background */
-    body::before {
-      content: "";
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: #00a8ff;
-      filter: blur(180px);
-      opacity: 0.18;
-      top: -150px;
-      left: -150px;
-      z-index: -1;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: #8b5cf6;
-      filter: blur(180px);
-      opacity: 0.15;
-      right: -150px;
-      bottom: -150px;
-      z-index: -1;
-    }
-
-    /* Navbar */
-    nav {
-      width: 100%;
-      padding: 25px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: absolute;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      color: #00a8ff;
-    }
-
-    .tag {
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 13px;
-      color: #b8c7d9;
-      background: rgba(255,255,255,0.04);
-    }
-
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 120px 20px 80px;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: 900px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 18px;
-      border-radius: 50px;
-      background: rgba(0,168,255,0.1);
-      border: 1px solid rgba(0,168,255,0.4);
-      color: #4dc3ff;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: clamp(55px, 9vw, 110px);
-      line-height: 0.9;
-      font-weight: 900;
-      letter-spacing: -5px;
-      margin-bottom: 30px;
-    }
-
-    h1 .git {
-      color: #fff;
-    }
-
-    h1 .github {
-      background: linear-gradient(90deg, #00a8ff, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      font-size: 20px;
-      color: #aeb9c8;
-      max-width: 650px;
-      margin: auto;
-      line-height: 1.6;
-    }
-
-    /* Date */
-    .date-box {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 40px 0;
-      flex-wrap: wrap;
-    }
-
-    .date {
-      padding: 15px 25px;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(15px);
-    }
-
-    .date strong {
-      display: block;
-      font-size: 22px;
-      color: #fff;
-    }
-
-    .date small {
-      color: #8492a6;
-    }
-
-    /* Buttons */
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      text-decoration: none;
-      padding: 15px 28px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: 0.3s;
-    }
-
-    .primary {
-      background: linear-gradient(90deg, #00a8ff, #6366f1);
-      color: white;
-      box-shadow: 0 10px 35px rgba(0,168,255,0.25);
-    }
-
-    .primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 45px rgba(0,168,255,0.4);
-    }
-
-    .secondary {
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .secondary:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-4px);
-    }
-
-    /* Workshop section */
-    .section {
-      padding: 100px 8%;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title h2 {
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: #8995a7;
-    }
-
-    .cards {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      padding: 30px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.045);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(20px);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(0,168,255,0.5);
-    }
-
-    .icon {
-      font-size: 35px;
-      margin-bottom: 20px;
-    }
-
-    .card h3 {
-      margin-bottom: 12px;
-      font-size: 21px;
-    }
-
-    .card p {
-      color: #8e9aaa;
-      line-height: 1.6;
-    }
-
-    /* Terminal */
-    .terminal {
-      max-width: 800px;
-      margin: 80px auto 0;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #090d14;
-      border: 1px solid #1c7cd1;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-    }
-
-    .terminal-head {
-      padding: 14px 18px;
-      background: #111722;
-      display: flex;
-      gap: 7px;
-    }
-
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-    }
-
-    .red { background: #ff5f57; }
-    .yellow { background: #ffbd2e; }
-    .green { background: #28c840; }
-
-    pre {
-      padding: 25px;
-      overflow-x: auto;
-      color: #72e0ff;
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .comment {
-      color: #617080;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 50px 20px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: #667386;
-    }
-
-    footer strong {
-      color: #fff;
-    }
-
-    /* Responsive */
-    @media (max-width: 800px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        letter-spacing: -3px;
-      }
-
-      nav {
-        padding: 20px;
-      }
-
-      .section {
-        padding: 70px 20px;
-      }
-    }
-  </style>
+  <meta name="description" content="Official landing page and interactive developer portal for the IEEE Computer Society — UCEOU Git & GitHub Workshop. Master branching, PRs, merge conflicts, and open-source collaboration." />
+  <meta name="keywords" content="IEEE CS, UCEOU, Git, GitHub, Open Source, Workshop, Version Control, Pull Requests, Merge Conflicts, Osmania University" />
+  <meta name="author" content="IEEE Computer Society — UCEOU" />
+  <meta name="theme-color" content="#030712" />
+  <meta name="color-scheme" content="dark" />
+  <link rel="canonical" href="https://pansuriyaforam.github.io/IEEE-CS-UCEOU-Git-GitHub-Workshop/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IEEE CS UCEOU | Git &amp; GitHub Workshop" />
+  <meta property="og:description" content="Hands-on Git &amp; GitHub workshop by IEEE Computer Society — UCEOU." />
+  <meta property="og:url" content="https://pansuriyaforam.github.io/IEEE-CS-UCEOU-Git-GitHub-Workshop/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230077ff'/%3E%3Ctext x='32' y='43' font-size='28' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='white'%3ECS%3C/text%3E%3C/svg%3E" />
+  <title>IEEE CS UCEOU | Git & GitHub Workshop</title>
+ 
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@700;800;900&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@700;800;900&display=swap" /></noscript>
+ 
+  <!-- External Styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <script src="index.js" defer></script>
 </head>
-
 <body>
-
-  <nav>
-    <div class="logo">
-      IEEE <span>CS</span>
-    </div>
-
-    <div class="tag">
-      COMPUTER SOCIETY
-    </div>
-  </nav>
-
+ 
+  <!-- Top Scroll Reading Progress Bar -->
+  <div class="progress" aria-hidden="true"></div>
+ 
+  <!-- Interactive Network Canvas Background -->
+  <canvas id="net" aria-hidden="true"></canvas>
+ 
+  <!-- Ambient Glow Elements -->
+  <div class="glow-orb orb-primary" aria-hidden="true"></div>
+  <div class="glow-orb orb-secondary" aria-hidden="true"></div>
+  <div class="glow-orb orb-cyan" aria-hidden="true"></div>
+ 
+  <!-- Toast Notification System -->
+  <div class="toast" role="status" aria-live="polite" id="app-toast"></div>
+ 
+  <!-- Mobile Nav Backdrop Overlay -->
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+ 
+  <!-- Header Navigation Bar -->
+  <header>
+    <nav class="navbar" id="navbar">
+      <a href="#" class="nav-brand" aria-label="IEEE CS UCEOU Workshop Homepage">
+        <div class="logo-icon">
+          <span>IEEE</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">IEEE <span>CS</span> UCEOU</span>
+          <span class="brand-sub">Git & GitHub Workshop</span>
+        </div>
+      </a>
+ 
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#overview" class="nav-link active">Overview</a></li>
+        <li><a href="#workflow" class="nav-link">Workflow</a></li>
+        <li><a href="#terminal" class="nav-link">Terminal CLI</a></li>
+        <li><a href="#learn" class="nav-link">Curriculum</a></li>
+        <li><a href="#cheatsheet" class="nav-link">Cheat Sheet</a></li>
+        <li><a href="#resources" class="nav-link">Resources</a></li>
+        <li class="nav-mobile-action">
+          <a href="#register" class="btn-primary open-modal-btn nav-drawer-join">
+            <span>Join Session</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </li>
+      </ul>
+ 
+      <div class="nav-actions">
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop" target="_blank" rel="noopener noreferrer" class="btn-github" title="Star IEEE-CS-UCEOU on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="btn-github-text">Star Repo</span>
+          <span class="btn-star-count" id="star-count-badge">⭐ Star</span>
+        </a>
+ 
+        <a href="#register" class="btn-primary open-modal-btn nav-btn-join">
+          <span>Join Session</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+ 
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="nav-links">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+ 
   <main>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-content">
-
-        <div class="badge">
-          IEEE COMPUTER SOCIETY • HANDS-ON WORKSHOP
-        </div>
-
-        <h1>
-          <span class="git">Git</span>
-          <br>
-          <span class="github">& GitHub</span>
-        </h1>
-
-        <p class="subtitle">
-          Master version control, collaborate like a pro,
-          and take your coding workflow to the next level.
-        </p>
-
-        <div class="date-box">
-          <div class="date">
-            <strong>17 SEPT</strong>
-            <small>DAY 01</small>
-          </div>
-
-          <div class="date">
-            <strong>18 SEPT</strong>
-            <small>DAY 02</small>
-          </div>
-
-          <div class="date">
-            <strong>2026</strong>
-            <small>IEEE CS</small>
-          </div>
-        </div>
-
-        <div class="buttons">
-          <a href="#workshop" class="btn primary">
-            Explore Workshop →
-          </a>
-
-          <a href="#register" class="btn secondary">
-            Register Now
-          </a>
-        </div>
-
+    <!-- HERO SECTION -->
+    <section class="hero" id="overview">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span class="badge-text">IEEE COMPUTER SOCIETY — UCEOU • HANDS-ON WORKSHOP</span>
       </div>
-    </section>
-
-
-    <!-- WORKSHOP -->
-    <section class="section" id="workshop">
-
-      <div class="section-title">
-        <h2>What You'll Learn</h2>
-        <p>From your first commit to collaborative development.</p>
+ 
+      <h1 class="hero-title">
+        <span class="gradient-text-git">Git</span> <span class="ampersand">&</span>
+        <span class="gradient-text-github">GitHub</span>
+      </h1>
+ 
+      <p class="hero-subtitle">
+        Move beyond <code class="code-pill">add</code>, <code class="code-pill">commit</code>, and <code class="code-pill">push</code>. Master branching, resolve merge conflicts, collaborate on code reviews, and make your mark in open source.
+      </p>
+ 
+      <!-- Event Schedule & Date Cards -->
+      <div class="hero-stats-grid">
+        <div class="stat-card" data-spotlight>
+          <div class="stat-icon-wrap">⚡</div>
+          <strong>17 SEPT</strong>
+          <small>DAY 01 • Git Fundamentals</small>
+        </div>
+        <div class="stat-card" data-spotlight>
+          <div class="stat-icon-wrap">🚀</div>
+          <strong>18 SEPT</strong>
+          <small>DAY 02 • GitHub Workflow</small>
+        </div>
+        <div class="stat-card" data-spotlight>
+          <div class="stat-icon-wrap">🏛️</div>
+          <strong>UCEOU</strong>
+          <small>Osmania University</small>
+        </div>
       </div>
-
-      <div class="cards">
-
-        <div class="card">
-          <div class="icon">⌘</div>
-          <h3>Git Fundamentals</h3>
-          <p>
-            Understand repositories, commits, branches,
-            merging and the core Git workflow.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">◉</div>
-          <h3>GitHub Workflow</h3>
-          <p>
-            Learn repositories, pull requests, issues,
-            collaboration and remote development.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">⚡</div>
-          <h3>Real Projects</h3>
-          <p>
-            Work with practical commands and collaborative
-            workflows that mirror real development teams.
-          </p>
-        </div>
-
-      </div>
-
-
-      <!-- TERMINAL -->
-      <div class="terminal">
-
-        <div class="terminal-head">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-        </div>
-
-        <pre><span class="comment"># Start your Git journey</span>
-
-git init
-
-git add .
-
-git commit -m "first commit"
-
-git branch -M main
-
-git remote add origin &lt;your-repository&gt;
-
-git push -u origin main</pre>
-
-      </div>
-
-    </section>
-
-
-    <!-- REGISTER -->
-    <section class="section" id="register">
-
-      <div class="section-title">
-        <h2>Ready to Git Started?</h2>
-
-        <p>
-          Join IEEE Computer Society for two days of
-          hands-on Git & GitHub learning.
-        </p>
-
-        <br>
-
-        <a href="#" class="btn primary">
-          Register for Workshop →
+ 
+      <!-- Action Buttons -->
+      <div class="hero-cta-group">
+        <a href="#workflow" class="btn-primary">
+          <span>Explore Workflow Pipeline</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Contribution Guide</span>
+        </a>
+        <a href="#terminal" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span>Launch Terminal CLI</span>
         </a>
       </div>
-
     </section>
-
+ 
+    <!-- SECTION 1: COLLABORATION WORKFLOW PIPELINE -->
+    <section class="section" id="workflow">
+      <div class="section-header">
+        <span class="section-tag">Interactive Collaboration Engine</span>
+        <h2 class="section-title">The Real GitHub Collaboration Flow</h2>
+        <p class="section-description">
+          Git becomes exponentially more powerful when building software with teams. Click any node in the pipeline below to inspect the real developer workflow step.
+        </p>
+      </div>
+ 
+      <div class="workflow-container" data-spotlight>
+        <div class="workflow-header-row">
+          <div class="workflow-nav-tabs">
+            <button class="tab-btn active">Open Source Contribution Workflow</button>
+          </div>
+          <div class="workflow-step-indicator" id="wf-step-counter">
+            Step <span id="current-step-num">1</span> of 10
+          </div>
+        </div>
+ 
+        <!-- Pipeline Progress Line Track -->
+        <div class="pipeline-track-wrapper">
+          <div class="pipeline-track" id="pipeline-track">
+            <!-- Dynamically populated by index.js -->
+          </div>
+        </div>
+ 
+        <!-- Inspector Card -->
+        <div class="workflow-detail-box">
+          <div class="detail-info">
+            <div class="detail-tag-row">
+              <span class="step-badge" id="wf-detail-badge">STEP 01</span>
+              <span class="step-category" id="wf-detail-category">GITHUB REMOTE</span>
+            </div>
+            <h3 id="wf-detail-title">1. Fork Repository 🍴</h3>
+            <p id="wf-detail-desc">Create your own personal copy of the repository on GitHub. This gives you a remote workspace where you can freely make changes without affecting the upstream project.</p>
+            
+            <div class="command-snippet">
+              <span class="cmd-dollar">$</span>
+              <code id="wf-detail-cmd">gh repo fork pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop --clone=false</code>
+              <button class="copy-btn copy-btn-interactive" data-copy="gh repo fork pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop --clone=false" title="Copy Command">
+                <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+ 
+            <!-- Stepper Controls -->
+            <div class="stepper-controls">
+              <button class="btn-step" id="wf-prev-btn" title="Previous Step">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Previous</span>
+              </button>
+              <button class="btn-step" id="wf-next-btn" title="Next Step">
+                <span>Next Step</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+ 
+          <div class="detail-visual">
+            <div class="visual-header">
+              <span class="visual-dot"></span>
+              <span>BRANCH / ARCHITECTURE TOPOLOGY</span>
+            </div>
+            <pre id="wf-detail-visual">GitHub Upstream (IEEE-CS-UCEOU) ──[ Fork ]──> Your GitHub Account (origin)</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- SECTION 2: INTERACTIVE TERMINAL SIMULATOR -->
+    <section class="section" id="terminal">
+      <div class="section-header">
+        <span class="section-tag">Hands-On CLI Environment</span>
+        <h2 class="section-title">Interactive Terminal Simulator</h2>
+        <p class="section-description">
+          Practice Git commands in a safe, interactive terminal right inside your browser. Type <code class="code-pill">help</code>, <code class="code-pill">git status</code>, or click preset commands below!
+        </p>
+      </div>
+ 
+      <div class="terminal-wrapper" id="terminal-container">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="terminal-dot dot-red" title="Close"></span>
+            <span class="terminal-dot dot-yellow" title="Minimize"></span>
+            <span class="terminal-dot dot-green" title="Expand"></span>
+          </div>
+          <div class="terminal-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>bash — user@ieee-cs-uceou: ~/git-workshop</span>
+          </div>
+          <button class="terminal-copy-btn" id="term-copy-all" title="Copy Terminal Output">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+ 
+        <div class="terminal-body" id="terminal-body" role="log" aria-live="polite">
+          <div class="terminal-line term-welcome">
+            ⚡ Welcome to IEEE CS UCEOU Git &amp; GitHub Workshop CLI v2.5! 🚀
+          </div>
+          <div class="terminal-line term-output">
+            Type <span class="term-cmd">help</span> to list available commands, or try <span class="term-cmd">git status</span>, <span class="term-cmd">git add .</span>, and <span class="term-cmd">git commit</span>.
+          </div>
+        </div>
+ 
+        <!-- Terminal Input Row -->
+        <div class="terminal-input-row">
+          <div class="term-prompt-cluster">
+            <span class="term-prompt">user@ieee-cs-uceou</span><span class="term-colon">:</span><span class="term-path">~/git-workshop</span><span class="term-branch" id="term-branch-indicator">(main)</span><span class="term-dollar">$</span>
+          </div>
+          <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a git command... (e.g. git status, git checkout -b feature)" autocomplete="off" spellcheck="false" aria-label="Terminal command input" />
+        </div>
+ 
+        <!-- Quick Command Preset Bar -->
+        <div class="quick-cmds-bar">
+          <span class="quick-cmd-title">⚡ Quick Run:</span>
+          <div class="quick-cmds-scroll">
+            <button class="quick-btn" data-cmd="git status">git status</button>
+            <button class="quick-btn" data-cmd="git add .">git add .</button>
+            <button class="quick-btn" data-cmd="git commit -m &quot;docs: add beginner FAQ&quot;">git commit -m "..."</button>
+            <button class="quick-btn" data-cmd="git checkout -b feature/cool-idea">git checkout -b feature</button>
+            <button class="quick-btn" data-cmd="git push origin main">git push origin main</button>
+            <button class="quick-btn" data-cmd="git log">git log</button>
+            <button class="quick-btn" data-cmd="ieee">ieee</button>
+            <button class="quick-btn" data-cmd="clear">clear</button>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- SECTION 3: CURRICULUM & WHAT YOU'LL LEARN -->
+    <section class="section" id="learn">
+      <div class="section-header">
+        <span class="section-tag">Workshop Modules</span>
+        <h2 class="section-title">What You'll Master</h2>
+        <p class="section-description">
+          Designed for developers seeking practical, real-world experience collaborating on shared codebases.
+        </p>
+      </div>
+ 
+      <div class="learn-grid">
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">🍴</div>
+          <h3>Forking &amp; Cloning</h3>
+          <p>Learn how to safely duplicate remote repositories, manage upstream remotes, and configure local repositories cleanly.</p>
+          <div class="card-tag">Foundation</div>
+        </div>
+ 
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">🌿</div>
+          <h3>Branching &amp; Merging</h3>
+          <p>Isolate your features with branch strategies. Master fast-forward merges, topic branches, and keeping main branch clean.</p>
+          <div class="card-tag">Branch Workflow</div>
+        </div>
+ 
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">⚔️</div>
+          <h3>Conflict Resolution</h3>
+          <p>Understand why merge conflicts occur and learn how to resolve them confidently using visual diff tools and CLI commands.</p>
+          <div class="card-tag">Troubleshooting</div>
+        </div>
+ 
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">🔃</div>
+          <h3>Pull Requests (PRs)</h3>
+          <p>Craft clear Pull Requests with issue linking, descriptive titles, change summaries, and proper template usage.</p>
+          <div class="card-tag">Collaboration</div>
+        </div>
+ 
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">👀</div>
+          <h3>Code Reviews &amp; Feedback</h3>
+          <p>Participate in peer code reviews, request changes, address review comments, and push updated commits to open PRs.</p>
+          <div class="card-tag">Quality Assurance</div>
+        </div>
+ 
+        <div class="learn-card" data-spotlight>
+          <div class="card-icon-box">🌱</div>
+          <h3>Open Source Workflow</h3>
+          <p>Gain first-hand experience submitting pull requests to community projects following production open-source practices.</p>
+          <div class="card-tag">Community &amp; Culture</div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- SECTION 4: SEARCHABLE CHEAT SHEET -->
+    <section class="section" id="cheatsheet">
+      <div class="section-header">
+        <span class="section-tag">Quick Reference Guide</span>
+        <h2 class="section-title">Interactive Git Cheat Sheet</h2>
+        <p class="section-description">
+          Search for any Git command or filter by category. Click the copy icon to copy commands instantly to your clipboard!
+        </p>
+      </div>
+ 
+      <div class="cheatsheet-controls">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="cheat-search" class="search-input" placeholder="Search commands (e.g. checkout, commit, push, stash)..." autocomplete="off" aria-label="Search Git cheat sheet" />
+          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search">✕</button>
+        </div>
+ 
+        <div class="filter-pills-row">
+          <div class="filter-pills" id="filter-pills">
+            <button class="filter-pill active" data-category="all">All <span class="pill-count">15</span></button>
+            <button class="filter-pill" data-category="basics">Basics <span class="pill-count">5</span></button>
+            <button class="filter-pill" data-category="branching">Branching <span class="pill-count">4</span></button>
+            <button class="filter-pill" data-category="remote">Remote &amp; PR <span class="pill-count">3</span></button>
+            <button class="filter-pill" data-category="undo">Undo &amp; Reset <span class="pill-count">3</span></button>
+          </div>
+          <div class="search-results-count" id="search-results-count">Showing 15 commands</div>
+        </div>
+      </div>
+ 
+      <div class="cheatsheet-grid" id="cheatsheet-grid">
+        <!-- Dynamically populated by index.js -->
+      </div>
+    </section>
+ 
+    <!-- SECTION 5: FIRST CONTRIBUTION GENERATOR -->
+    <section class="section" id="contribution-ideas">
+      <div class="section-header">
+        <span class="section-tag">Workshop Hands-on Task</span>
+        <h2 class="section-title">Make Your First Contribution</h2>
+        <p class="section-description">
+          You don't need a huge feature to contribute to open source. Roll a beginner task below and practice the complete PR workflow!
+        </p>
+      </div>
+ 
+      <div class="generator-box" data-spotlight>
+        <div class="generator-badge-top">Interactive Task Generator</div>
+        
+        <div id="idea-container" class="idea-container" aria-live="polite">
+          <!-- Dynamically populated by index.js -->
+        </div>
+ 
+        <div class="generator-action-row">
+          <button id="roll-idea-btn" class="btn-primary btn-roll">
+            <svg class="dice-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 8h.01"></path><path d="M8 8h.01"></path><path d="M8 16h.01"></path><path d="M16 16h.01"></path><path d="M12 12h.01"></path></svg>
+            <span>Roll New Contribution Idea</span>
+          </button>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- SECTION 6: REPOSITORY RESOURCES HUB -->
+    <section class="section" id="resources">
+      <div class="section-header">
+        <span class="section-tag">Repository Shortcuts</span>
+        <h2 class="section-title">Workshop Resources &amp; Files</h2>
+        <p class="section-description">
+          Access all workshop materials, presentation slides, practice exercises, and contribution documents directly from the repo.
+        </p>
+      </div>
+ 
+      <div class="resources-grid">
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/presentation/intro-to-git-github-ppt.pdf" class="resource-card" target="_blank" rel="noopener noreferrer" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">📄</div>
+            <span class="resource-type-badge">PDF Slides</span>
+          </div>
+          <div class="resource-body">
+            <h4>Workshop Presentation</h4>
+            <p>Complete slide deck used during Day 1 &amp; Day 2 sessions detailing version control concepts.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>Open PDF Slides</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+ 
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="resource-card" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">📖</div>
+            <span class="resource-type-badge">Guide</span>
+          </div>
+          <div class="resource-body">
+            <h4>Contribution Guide</h4>
+            <p>Step-by-step instructions on forking, creating branches, committing, and opening Pull Requests.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>Read Guide</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+ 
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/resources/Git_GitHub_Cheat_Sheet.pdf" class="resource-card" target="_blank" rel="noopener noreferrer" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">💡</div>
+            <span class="resource-type-badge">PDF Doc</span>
+          </div>
+          <div class="resource-body">
+            <h4>Git Cheat Sheet PDF</h4>
+            <p>Comprehensive command cheat sheet and troubleshooting guide for common Git scenarios.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>View PDF Cheatsheet</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+ 
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/practice/README.md" target="_blank" rel="noopener noreferrer" class="resource-card" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">🎯</div>
+            <span class="resource-type-badge">Sandbox</span>
+          </div>
+          <div class="resource-body">
+            <h4>Practice Sandbox</h4>
+            <p>Hands-on practice exercises designed to safely test merge conflict resolution.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>Start Practice</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+ 
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer" class="resource-card" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">🤝</div>
+            <span class="resource-type-badge">Policy</span>
+          </div>
+          <div class="resource-body">
+            <h4>Code of Conduct</h4>
+            <p>Our commitment to fostering an inclusive, welcoming, and respectful community environment.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>Read Policy</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+ 
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/resources/useful-resources.md" target="_blank" rel="noopener noreferrer" class="resource-card" data-spotlight>
+          <div class="resource-top">
+            <div class="resource-icon-wrap">🔗</div>
+            <span class="resource-type-badge">Curated</span>
+          </div>
+          <div class="resource-body">
+            <h4>Curated Learning Links</h4>
+            <p>Handpicked interactive games, tutorials, documentation, and videos for deeper learning.</p>
+          </div>
+          <div class="resource-arrow">
+            <span>Explore Links</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
-
-
+ 
+  <!-- REGISTRATION / QUICK START MODAL -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content" data-spotlight>
+      <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+      
+      <div class="modal-badge">
+        IEEE CS UCEOU WORKSHOP
+      </div>
+      
+      <h2 class="modal-title" id="modal-title">
+        Get Started with the Workshop 🚀
+      </h2>
+      
+      <p class="modal-desc">
+        Follow these 3 quick steps to participate in the hands-on session and make your first open-source Pull Request:
+      </p>
+ 
+      <div class="modal-steps-list">
+        <div class="modal-step-item">
+          <div class="step-circle">1</div>
+          <div class="step-item-content">
+            <strong>Fork the Repository</strong>
+            <p>Fork the <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop" target="_blank" rel="noopener noreferrer">IEEE-CS-UCEOU GitHub Repository</a> to your personal account.</p>
+          </div>
+        </div>
+ 
+        <div class="modal-step-item">
+          <div class="step-circle">2</div>
+          <div class="step-item-content">
+            <strong>Clone to Your Machine</strong>
+            <p>Download your fork locally: <code class="code-pill">git clone &lt;your-fork-url&gt;</code></p>
+          </div>
+        </div>
+ 
+        <div class="modal-step-item">
+          <div class="step-circle">3</div>
+          <div class="step-item-content">
+            <strong>Create Branch &amp; Open PR</strong>
+            <p>Follow guidelines in <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a> to open your first PR!</p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="modal-actions-row">
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <span>Start Contribution Guide</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>Open GitHub Repo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- FLOATING BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="back-to-top" title="Back to Top" aria-label="Back to top of page">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+ 
+  <!-- FOOTER -->
   <footer>
-    <p>
-      <strong>IEEE Computer Society</strong>
-      &nbsp; • &nbsp;
-      Git & GitHub Workshop
-      &nbsp; • &nbsp;
-      17–18 September 2026
-    </p>
-
-    <br>
-
-    <p>Build. Commit. Collaborate. 🚀</p>
+    <div class="footer-content">
+      <div class="footer-brand">IEEE <span>CS</span> UCEOU</div>
+      <p class="footer-text">
+        <strong>IEEE Computer Society</strong> • University College of Engineering, Osmania University
+      </p>
+      <div class="footer-quote">
+        « Don't just learn Git. Use Git to collaborate. »
+      </div>
+      <div class="footer-bottom-row">
+        <p class="footer-license">
+          Distributed under the project <a href="https://github.com/pansuriyaForam/IEEE-CS-UCEOU-Git-GitHub-Workshop/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>. Stars &amp; Contributions always welcome! ❤️
+        </p>
+      </div>
+    </div>
   </footer>
-
+ 
 </body>
 </html>
